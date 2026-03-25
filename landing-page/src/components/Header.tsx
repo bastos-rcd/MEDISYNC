@@ -36,7 +36,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-white border-b border-black/20 flex flex-row justify-between items-center gap-20 p-2">
+    <header className="w-full sticky top-0 z-50 bg-white border-b border-black/20 flex flex-row justify-between items-center gap-20 p-2 lg:px-20">
       <a href="/">
         <img src="/logo-desktop.webp" className="hidden lg:block w-20" />
         <img src="/logo-mobile.webp" className="block lg:hidden w-10" />
