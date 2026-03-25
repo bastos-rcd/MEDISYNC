@@ -39,7 +39,7 @@ export default function Values() {
   return (
     <section
       id="values"
-      className="flex flex-col justify-center items-center gap-10 p-10"
+      className="flex flex-col justify-center items-center gap-10 px-10"
     >
       <div className="w-full lg:max-w-1/2 flex flex-col text-center gap-6">
         <h1 className="text-(--primary) font-bold">
