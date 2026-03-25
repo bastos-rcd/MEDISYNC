@@ -9,7 +9,7 @@ cd MEDISYNC
 
 ## Landing Page
 
-> **React**
+> **React** : [medisync-landing.vercel.app](https://medisync-landing.vercel.app/)
 
 ```bash
 cd landing-page

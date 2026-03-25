@@ -4,6 +4,7 @@ import Values from "./components/Values";
 import About from "./components/About";
 import Features from "./components/Features";
 import Prices from "./components/Prices";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -21,6 +22,8 @@ export default function App() {
 
         <Prices />
       </div>
+
+      <Footer />
     </>
   );
 }
