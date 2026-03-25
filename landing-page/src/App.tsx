@@ -1,12 +1,16 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import Values from "./components/Values";
 
 export default function App() {
   return (
-    <div className="h-screen flex flex-col bg-[color-mix(in_srgb,var(--tertiary),transparent_80%)]">
+    <>
       <Header />
+      <div className="flex flex-col bg-(--tertiary)/10 gap-14">
+        <Hero />
 
-      <Hero />
-    </div>
+        <Values />
+      </div>
+    </>
   );
 }

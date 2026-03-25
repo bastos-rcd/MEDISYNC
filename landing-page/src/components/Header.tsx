@@ -36,7 +36,7 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-white border-b border-[color-mix(in_srgb,black,transparent_80%)] flex flex-row justify-between items-center gap-20 p-2">
+    <header className="w-full sticky top-0 z-50 bg-white border-b border-black/20 flex flex-row justify-between items-center gap-20 p-2">
       <a href="/">
         <img src="/logo-desktop.webp" className="hidden lg:block w-20" />
         <img src="/logo-mobile.webp" className="block lg:hidden w-10" />
@@ -46,6 +46,7 @@ export default function Header() {
         <NavLink href="#values">Nos Valeurs</NavLink>
         <NavLink href="#about">Qui sommes-nous ?</NavLink>
         <NavLink href="#features">Fonctionnalités</NavLink>
+        <NavLink href="#prices">Tarifs</NavLink>
       </div>
 
       <div className="hidden lg:flex flex-row gap-4">
@@ -63,10 +64,11 @@ export default function Header() {
       </button>
 
       {isOpen && (
-        <div className="absolute lg:hidden left-0 top-full w-full bg-white border-b border-[color-mix(in_srgb,black,transparent_80%)] flex flex-col items-start gap-6 p-4">
+        <div className="absolute lg:hidden left-0 top-full w-full bg-white border-b border-black/20 flex flex-col items-start gap-6 p-4">
           <NavLink href="#values">Nos Valeurs</NavLink>
           <NavLink href="#about">Qui sommes-nous ?</NavLink>
           <NavLink href="#features">Fonctionnalités</NavLink>
+          <NavLink href="#prices">Tarifs</NavLink>
           <LinkButton href="https://medisync-scheduler-pro.vercel.app/">
             Accéder à l'application
           </LinkButton>

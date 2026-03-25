@@ -18,8 +18,8 @@ const LinkButton = ({
 
 const Stat = ({ value, label }: { value: string; label: string }) => (
   <div className="text-center lg:text-left">
-    <h2 className="text-3xl font-bold text-white">{value}</h2>
-    <h3 className="text-sm text-white/60">{label}</h3>
+    <h2 className="font-bold text-white">{value}</h2>
+    <h3 className="text-white/60">{label}</h3>
   </div>
 );
 
@@ -61,10 +61,10 @@ export default function Hero() {
             gagnez du temps, apaisez vos équipes.
           </h3>
 
-          <div className="w-full flex flex-row gap-4 justify-center lg:justify-start">
+          <div className="w-full flex flex-col lg:flex-row gap-4 justify-center lg:justify-start">
             <LinkButton href="https://medisync-scheduler-pro.vercel.app/">
               Tester l'application
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-8" />
             </LinkButton>
             <LinkButton href="https://docs.google.com/forms/d/e/1FAIpQLSeuTzbgUBJB8y8WhDP9kMNFpFsUhymFF-29K6CM2T1LG-L8Sg/viewform?usp=header">
               Donnez votre avis
