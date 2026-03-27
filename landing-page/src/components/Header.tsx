@@ -1,77 +1,84 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Menu, X } from "lucide-react";
 
-const NavLink = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => (
-  <a
-    className="text-(--primary) hover:text-(--secondary) transition-colors"
-    href={href}
-  >
-    {children}
-  </a>
-);
-
-const LinkButton = ({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) => (
-  <a
-    className="flex justify-center items-center font-bold rounded-lg bg-(--secondary) text-white hover:bg-(--secondary)/80 transition-colors px-2.5 py-1.5"
-    href={href}
-    target="_blank"
-  >
-    {children}
-  </a>
-);
+import Link from "./ui/link";
+import Button from "./ui/button";
 
 export default function Header() {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-white border-b border-black/20 flex flex-row justify-between items-center gap-20 p-2 lg:px-20">
-      <a href="/">
-        <img src="/logo-desktop.webp" className="hidden lg:block w-20" />
-        <img src="/logo-mobile.webp" className="block lg:hidden w-10" />
-      </a>
+    <header className="w-full sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-black/20">
+      <nav className="flex flex-row justify-between items-center gap-20 p-2 lg:p-0 lg:px-20">
+        <Link href="/" onClick={() => setIsOpen(false)}>
+          <img src="/logo-desktop.webp" className="hidden lg:block w-20" />
+          <img src="/logo-mobile.webp" className="block lg:hidden w-20" />
+        </Link>
 
-      <div className="hidden lg:flex flex-row gap-4">
-        <NavLink href="#values">Nos Valeurs</NavLink>
-        <NavLink href="#about">Qui sommes-nous ?</NavLink>
-        <NavLink href="#features">Fonctionnalités</NavLink>
-        <NavLink href="#prices">Tarifs</NavLink>
-      </div>
+        <div className="hidden lg:flex flex-row gap-4">
+          {Array.from(t("navigation")).map((item: any, index: number) => (
+            <Link key={index} href={item.link}>
+              {item.label}
+            </Link>
+          ))}
+        </div>
 
-      <div className="hidden lg:flex flex-row gap-4">
-        <LinkButton href="https://medisync-scheduler-pro.vercel.app/">
-          Accéder à l'application
-        </LinkButton>
-      </div>
+        <div className="hidden lg:flex flex-row gap-4">
+          <Button
+            variant="outline"
+            onClick={() => window.open(t("form.link"), "_blank")}
+          >
+            {t("form.label")}
+          </Button>
 
-      <button
-        className="lg:hidden p-2 text-black"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle menu"
-      >
-        {isOpen ? <X size={25} /> : <Menu size={25} />}
-      </button>
+          <Button onClick={() => window.open(t("application.link"), "_blank")}>
+            {t("application.label")}
+          </Button>
+        </div>
+
+        <button className="lg:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={25} /> : <Menu size={25} />}
+        </button>
+      </nav>
 
       {isOpen && (
-        <div className="absolute lg:hidden left-0 top-full w-full bg-white border-b border-black/20 flex flex-col items-start gap-6 p-4">
-          <NavLink href="#values">Nos Valeurs</NavLink>
-          <NavLink href="#about">Qui sommes-nous ?</NavLink>
-          <NavLink href="#features">Fonctionnalités</NavLink>
-          <NavLink href="#prices">Tarifs</NavLink>
-          <LinkButton href="https://medisync-scheduler-pro.vercel.app/">
-            Accéder à l'application
-          </LinkButton>
+        <div className="lg:hidden animate-fade-in">
+          <nav className="flex flex-col gap-6 p-4">
+            {Array.from(t("navigation")).map((item: any, index: number) => (
+              <Link
+                key={index}
+                href={item.link}
+                onClick={() => setIsOpen(false)}
+              >
+                <h3>{item.label}</h3>
+              </Link>
+            ))}
+
+            <div className="flex flex-col gap-2">
+              <Button
+                variant="outline"
+                size="large"
+                onClick={() => {
+                  window.open(t("form.link"), "_blank");
+                  setIsOpen(false);
+                }}
+              >
+                <h3>{t("form.label")}</h3>
+              </Button>
+
+              <Button
+                size="large"
+                onClick={() => {
+                  window.open(t("application.link"), "_blank");
+                  setIsOpen(false);
+                }}
+              >
+                <h3>{t("application.label")}</h3>
+              </Button>
+            </div>
+          </nav>
         </div>
       )}
     </header>

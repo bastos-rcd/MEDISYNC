@@ -11,7 +11,7 @@ export default function App() {
     <>
       <Header />
 
-      <div className="flex flex-col bg-(--tertiary)/10 gap-14">
+      <div className="flex flex-col bg-(--tertiary)/10 gap-10 lg:gap-14">
         <Hero />
 
         <Values />

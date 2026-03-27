@@ -1,0 +1,28 @@
+{
+  "navigation": [
+    {
+      "label": "Nos Valeurs",
+      "link": "#values"
+    },
+    {
+      "label": "Qui sommes-nous ?",
+      "link": "#about"
+    },
+    {
+      "label": "Fonctionnalités",
+      "link": "#features"
+    },
+    {
+      "label": "Tarifs",
+      "link": "#prices"
+    }
+  ],
+  "application": {
+    "label": "Accéder à l'application",
+    "link": "https://medisync-scheduler-pro.vercel.app/"
+  },
+  "form": {
+    "label": "Donner son avis",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSeuTzbgUBJB8y8WhDP9kMNFpFsUhymFF-29K6CM2T1LG-L8Sg/viewform"
+  }
+}
