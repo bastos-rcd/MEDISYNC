@@ -74,5 +74,47 @@
         "label": "Conflits"
       }
     ]
+  },
+
+  "values": {
+    "badge": "Nos Valeurs",
+    "title": {
+      "start": "Les piliers de notre ",
+      "param": "engagement",
+      "end": ""
+    },
+    "description": "Trois valeurs fondamentales guident notre mission : offrir une solution de planification qui allie précision technique et humanité.",
+    "cards": [
+      {
+        "icon": "shield",
+        "title": "Fiabilité et Précision",
+        "description": "Des plannings rigoureux et sans conflit, où chaque contrainte est respectée.",
+        "features": [
+          "Conformité aux réglementations de travail",
+          "Réduction du risque d'erreurs humaines",
+          "Plannings sans conflits garantis"
+        ]
+      },
+      {
+        "icon": "zap",
+        "title": "Efficacité et Innovation",
+        "description": "Transformez des heures de travail manuel en un clic.",
+        "features": [
+          "Automatisation intelligente",
+          "Interface intuitive et puissante",
+          "Gain de temps considérable"
+        ]
+      },
+      {
+        "icon": "heart",
+        "title": "Équilibre et Sérénité",
+        "description": "L'humain au cœur du planning, avec respect des rythmes de chacun.",
+        "features": [
+          "Respect des contraintes de vie",
+          "Transparence totale sur les affectations",
+          "Réduction du stress des équipes"
+        ]
+      }
+    ]
   }
 }

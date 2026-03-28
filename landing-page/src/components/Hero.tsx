@@ -1,4 +1,3 @@
-import { ArrowRight, User } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import Badge from "./ui/badge";
@@ -6,6 +5,7 @@ import Title from "./ui/title";
 import Button from "./ui/button";
 import Stat from "./ui/stat";
 import Alert from "./ui/alert";
+import Icon from "./ui/icon";
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -31,7 +31,7 @@ export default function Hero() {
             >
               <div className="flex items-center gap-2">
                 {t("application.label")}
-                <ArrowRight className="w-5" />
+                <Icon icon="arrow-right" color="white" size={20} />
               </div>
             </Button>
 
@@ -86,7 +86,7 @@ export default function Hero() {
                     className="flex items-center bg-white/80 rounded-lg gap-2 p-2"
                   >
                     <div className="w-8 h-8 flex items-center justify-center rounded-full bg-(--secondary)/20">
-                      <User size={15} className="text-(--secondary)" />
+                      <Icon size={15} icon="user" />
                     </div>
 
                     <div className="flex-1">

@@ -1,12 +1,20 @@
 interface Props {
+  variant?: "default" | "primary";
   start: string;
   param: string;
   end: string;
 }
 
-export default function Title({ start, param, end }: Props) {
+export default function Title({
+  variant = "default",
+  start,
+  param,
+  end,
+}: Props) {
   return (
-    <h1 className="font-bold text-white">
+    <h1
+      className={`font-bold ${variant === "primary" ? "text-(--primary)" : "text-white"}`}
+    >
       {start}
 
       <span className="relative">
