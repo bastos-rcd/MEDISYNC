@@ -10,7 +10,10 @@ export default function Prices() {
   const { t } = useTranslation();
 
   return (
-    <section className="bg-linear-90 from-(--primary) to-(--secondary)">
+    <section
+      id="prices"
+      className="bg-linear-90 from-(--primary) to-(--secondary)"
+    >
       <div className="flex flex-col items-center text-center gap-10 px-10 lg:px-20 py-10 lg:py-18">
         <Badge label={t("prices.badge")} />
 
