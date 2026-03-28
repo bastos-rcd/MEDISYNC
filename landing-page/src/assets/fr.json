@@ -212,5 +212,15 @@
         "features": ["Personnalisable"]
       }
     ]
+  },
+
+  "footer": {
+    "title": {
+      "start": "Medi",
+      "param": "Sync",
+      "end": ""
+    },
+    "description": "La simplicité au service de la vie",
+    "copyright": "Medisync. Tous droits réservés."
   }
 }
