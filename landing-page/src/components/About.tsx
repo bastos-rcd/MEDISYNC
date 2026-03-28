@@ -1,82 +1,69 @@
-import { CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const benefits = [
-  "Modéliser les profils des salariés et exigences des services",
-  "Générer un planning cohérent et conforme en un seul clic",
-  "Respecter les contraintes horaires, temps partiels et autres",
-  "Garantir la conformité aux réglementations de travail",
-];
-
-const stats = [
-  { value: "CHU", label: "Hôpitaux" },
-  { value: "Cliniques", label: "Humaines & Vétérinaires" },
-  { value: "100%", label: "Automatisé" },
-  { value: "0", label: "Conflits" },
-];
+import Title from "./ui/title";
+import Badge from "./ui/badge";
+import Description from "./ui/description";
+import Icon from "./ui/icon";
+import Stat from "./ui/stat";
+import Alert from "./ui/alert";
 
 export default function About() {
+  const { t } = useTranslation();
+
   return (
     <section
       id="about"
-      className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center px-10"
+      className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-20 px-10 lg:px-20"
     >
       <div className="w-full flex flex-col text-left gap-8">
-        <h1 className="text-(--primary) font-bold">
-          <span className="text-(--secondary)">Medisync</span> : La
-          planification intelligente pour la santé
-        </h1>
+        <Badge variant="secondary" label={t("about.badge")} />
 
-        <p className="text-(--primary)">
-          Chez <strong>Medisync</strong>, notre mission est de rétablir
-          l'équilibre au cœur de votre organisation. Nous avons conçu une
-          solution de planification intelligente, automatique et hautement
-          paramétrable pour démanteler la complexité du scheduling.
-        </p>
+        <Title
+          variant="primary"
+          start={t("about.title.start")}
+          param={t("about.title.param")}
+          end={t("about.title.end")}
+        />
+
+        <Description content={t("about.description")} />
 
         <div className="space-y-4">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="flex items-start gap-2">
-              <CheckCircle className="w-5 h-5 text-(--secondary)" />
-              <span className="text-(--primary)">{benefit}</span>
-            </div>
-          ))}
+          {Array.from(t("about.benefits")).map(
+            (benefit: any, index: number) => (
+              <div key={index} className="flex items-start gap-2">
+                <Icon icon="check-circle" size={15} />
+                <span className="text-(--primary)">{benefit}</span>
+              </div>
+            ),
+          )}
         </div>
 
         <div className="pl-4 border-l-4 border-(--secondary)">
           <p className="font-semibold text-(--primary) italic">
-            "Libérer les Ressources Humaines du fardeau logistique. Un planning
-            bien fait est le premier pas vers des soins bien donnés."
+            "{t("about.quote")}"
           </p>
         </div>
       </div>
 
       <div className="relative">
-        <div className="flex flex-col text-white relative bg-linear-120 from-(--primary) to-(--secondary) rounded-2xl gap-4 lg:gap-8 p-4 lg:p-8">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-xl bg-(--secondary)/20 flex items-center justify-center">
-              <h2 className="font-bold">M</h2>
-            </div>
-            <div>
-              <h3 className="font-bold">Medisync</h3>
-              <p className="text-white/60">
-                La simplicité au service de la vie
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 lg:gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="bg-white/10 rounded-xl p-4">
-                <h2 className="font-bold">{stat.value}</h2>
-                <p className="text-white/80">{stat.label}</p>
-              </div>
+        <div className="bg-linear-120 from-(--primary) to-(--secondary) rounded-2xl gap-4 lg:gap-8 p-4 lg:p-8">
+          <div className="grid grid-cols-2 gap-4 lg:gap-8">
+            {Array.from(t("about.stats")).map((stat: any, index: number) => (
+              <Stat
+                key={index}
+                variant="primary"
+                value={stat.value}
+                label={stat.label}
+              />
             ))}
           </div>
         </div>
 
-        <div className="hidden lg:block absolute -bottom-12 -left-8 bg-white rounded-xl border border-black/20 p-4">
-          <p className="text-(--primary)">Résultat</p>
-          <h3 className="font-bold text-(--secondary)">Sérénité des équipes</h3>
+        <div className="hidden lg:block absolute -bottom-12 -left-8">
+          <Alert
+            value={t("about.alert.value")}
+            label={t("about.alert.label")}
+          />
         </div>
       </div>
     </section>

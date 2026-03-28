@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 
+import Badge from "./ui/badge";
 import Title from "./ui/title";
 import Description from "./ui/description";
 import Card from "./ui/card";
@@ -13,7 +14,9 @@ export default function Values() {
       id="values"
       className="flex flex-col justify-center items-center gap-10 px-10 lg:px-20"
     >
-      <div className="w-full lg:w-1/2 flex flex-col text-center gap-6">
+      <div className="w-full lg:w-1/2 flex flex-col items-center text-center gap-6">
+        <Badge variant="secondary" label={t("values.badge")} />
+
         <Title
           variant="primary"
           start={t("values.title.start")}

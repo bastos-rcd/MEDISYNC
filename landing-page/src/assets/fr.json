@@ -116,5 +116,32 @@
         ]
       }
     ]
+  },
+
+  "about": {
+    "badge": "Qui sommes-nous ?",
+    "title": {
+      "start": "",
+      "param": "Medisync",
+      "end": " : La planification intelligente pour la santé"
+    },
+    "description": "Chez Medisync, notre mission est de rétablir l'équilibre au cœur de votre organisation. Nous avons conçu une solution de planification intelligente, automatique et hautement paramétrable pour démanteler la complexité du scheduling.",
+    "benefits": [
+      "Modéliser les profils des salariés et exigences des services",
+      "Générer un planning cohérent et conforme en un seul clic",
+      "Respecter les contraintes horaires, temps partiels et autres",
+      "Garantir la conformité aux réglementations de travail"
+    ],
+    "quote": "Libérer les Ressources Humaines du fardeau logistique. Un planning bien fait est le premier pas vers des soins bien donnés.",
+    "stats": [
+      { "value": "CHU", "label": "Hôpitaux" },
+      { "value": "Cliniques", "label": "Humaines & Vétérinaires" },
+      { "value": "100%", "label": "Automatisé" },
+      { "value": "0", "label": "Conflits" }
+    ],
+    "alert": {
+      "value": "Sérénité des équipes",
+      "label": "Résultat"
+    }
   }
 }

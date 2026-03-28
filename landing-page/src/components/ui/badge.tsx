@@ -1,12 +1,17 @@
 interface Props {
+  variant?: "default" | "secondary";
   label: string;
 }
 
-export default function Badge({ label }: Props) {
+export default function Badge({ variant = "default", label }: Props) {
   return (
-    <div className="inline-flex items-center rounded-full bg-(--secondary)/20 text-white gap-2 px-3 py-2">
+    <div className="w-fit inline-flex items-center rounded-full bg-(--secondary)/10 gap-2 px-3 py-2">
       <span className="w-2 h-2 rounded-full bg-(--tertiary) animate-pulse" />
-      <span>{label}</span>
+      <span
+        className={`text-${variant === "secondary" ? "(--secondary) font-semibold" : "white"}`}
+      >
+        {label}
+      </span>
     </div>
   );
 }

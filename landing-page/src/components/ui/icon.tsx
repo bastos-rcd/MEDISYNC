@@ -1,9 +1,16 @@
-import { User, Zap, Heart, Shield, ArrowRight } from "lucide-react";
+import {
+  User,
+  Zap,
+  Heart,
+  Shield,
+  ArrowRight,
+  CheckCircle,
+} from "lucide-react";
 
 interface Props {
   size?: number;
-  color?: "default" | "white";
-  icon: "user" | "shield" | "zap" | "heart" | "arrow-right";
+  color?: "white";
+  icon: "user" | "shield" | "zap" | "heart" | "arrow-right" | "check-circle";
 }
 
 export default function Icon({ icon, size, color }: Props) {
@@ -12,32 +19,39 @@ export default function Icon({ icon, size, color }: Props) {
       return (
         <User
           size={size || 25}
-          className={`text-(--${color || "secondary"})`}
+          className={`text-${color || "(--secondary)"}`}
         />
       );
     case "shield":
       return (
         <Shield
           size={size || 25}
-          className={`text-(--${color || "secondary"})`}
+          className={`text-${color || "(--secondary)"}`}
         />
       );
     case "zap":
       return (
-        <Zap size={size || 25} className={`text-(--${color || "secondary"})`} />
+        <Zap size={size || 25} className={`text-${color || "(--secondary)"}`} />
       );
     case "heart":
       return (
         <Heart
           size={size || 25}
-          className={`text-(--${color || "secondary"})`}
+          className={`text-${color || "(--secondary)"}`}
         />
       );
     case "arrow-right":
       return (
         <ArrowRight
           size={size || 25}
-          className={`text-(--${color || "secondary"})`}
+          className={`text-${color || "(--secondary)"}`}
+        />
+      );
+    case "check-circle":
+      return (
+        <CheckCircle
+          size={size || 25}
+          className={`text-${color || "(--secondary)"}`}
         />
       );
   }
