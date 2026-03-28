@@ -1,16 +1,32 @@
 import {
   User,
+  Users,
   Zap,
   Heart,
   Shield,
   ArrowRight,
   CheckCircle,
+  Settings,
+  Calendar,
+  BarChart3,
+  Bell,
 } from "lucide-react";
 
 interface Props {
   size?: number;
   color?: "white";
-  icon: "user" | "shield" | "zap" | "heart" | "arrow-right" | "check-circle";
+  icon:
+    | "user"
+    | "shield"
+    | "zap"
+    | "heart"
+    | "arrow-right"
+    | "check-circle"
+    | "users"
+    | "settings"
+    | "calendar"
+    | "bar-chart-3"
+    | "bell";
 }
 
 export default function Icon({ icon, size, color }: Props) {
@@ -50,6 +66,41 @@ export default function Icon({ icon, size, color }: Props) {
     case "check-circle":
       return (
         <CheckCircle
+          size={size || 25}
+          className={`text-${color || "(--secondary)"}`}
+        />
+      );
+    case "users":
+      return (
+        <Users
+          size={size || 25}
+          className={`text-${color || "(--secondary)"}`}
+        />
+      );
+    case "settings":
+      return (
+        <Settings
+          size={size || 25}
+          className={`text-${color || "(--secondary)"}`}
+        />
+      );
+    case "calendar":
+      return (
+        <Calendar
+          size={size || 25}
+          className={`text-${color || "(--secondary)"}`}
+        />
+      );
+    case "bar-chart-3":
+      return (
+        <BarChart3
+          size={size || 25}
+          className={`text-${color || "(--secondary)"}`}
+        />
+      );
+    case "bell":
+      return (
+        <Bell
           size={size || 25}
           className={`text-${color || "(--secondary)"}`}
         />

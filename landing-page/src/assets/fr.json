@@ -143,5 +143,47 @@
       "value": "Sérénité des équipes",
       "label": "Résultat"
     }
+  },
+
+  "features": {
+    "badge": "Fonctionnalités",
+    "title": {
+      "start": "Tout ce dont vous avez ",
+      "param": "besoin",
+      "end": ""
+    },
+    "description": "Une suite complète d'outils pour transformer la gestion de vos plannings et libérer du temps pour ce qui compte vraiment : le soin.",
+    "cards": [
+      {
+        "icon": "users",
+        "title": "Gestion des Personas",
+        "description": "Créez et gérez les profils de chaque salarié avec leurs contraintes horaires, temps partiels et forfaits spécifiques."
+      },
+      {
+        "icon": "settings",
+        "title": "Paramétrage Service",
+        "description": "Configurez les règles de votre service : horaires, nombre de personnes, règles internes et contraintes légales."
+      },
+      {
+        "icon": "calendar",
+        "title": "Génération Automatique",
+        "description": "Générez des plannings cohérents et conformes en un seul clic, respectant toutes les contraintes définies."
+      },
+      {
+        "icon": "bar-chart-3",
+        "title": "Tableaux de Bord",
+        "description": "Visualisez en temps réel l'état de vos plannings, les heures travaillées et les indicateurs clés."
+      },
+      {
+        "icon": "bell",
+        "title": "Alertes Intelligentes",
+        "description": "Recevez des notifications en cas de conflit potentiel ou de non-conformité détectée."
+      },
+      {
+        "icon": "shield",
+        "title": "Conformité Garantie",
+        "description": "Assurez le respect des réglementations de travail et des accords collectifs automatiquement."
+      }
+    ]
   }
 }

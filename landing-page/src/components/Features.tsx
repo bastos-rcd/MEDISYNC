@@ -1,78 +1,40 @@
-import {
-  Users,
-  Settings,
-  Calendar,
-  BarChart3,
-  Bell,
-  Shield,
-} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-const features = [
-  {
-    icon: Users,
-    title: "Gestion des Personas",
-    description:
-      "Créez et gérez les profils de chaque salarié avec leurs contraintes horaires, temps partiels et forfaits spécifiques.",
-  },
-  {
-    icon: Settings,
-    title: "Paramétrage Service",
-    description:
-      "Configurez les règles de votre service : horaires, nombre de personnes, règles internes et contraintes légales.",
-  },
-  {
-    icon: Calendar,
-    title: "Génération Automatique",
-    description:
-      "Générez des plannings cohérents et conformes en un seul clic, respectant toutes les contraintes définies.",
-  },
-  {
-    icon: BarChart3,
-    title: "Tableaux de Bord",
-    description:
-      "Visualisez en temps réel l'état de vos plannings, les heures travaillées et les indicateurs clés.",
-  },
-  {
-    icon: Bell,
-    title: "Alertes Intelligentes",
-    description:
-      "Recevez des notifications en cas de conflit potentiel ou de non-conformité détectée.",
-  },
-  {
-    icon: Shield,
-    title: "Conformité Garantie",
-    description:
-      "Assurez le respect des réglementations de travail et des accords collectifs automatiquement.",
-  },
-];
+import Badge from "./ui/badge";
+import Title from "./ui/title";
+import Description from "./ui/description";
+import Icon from "./ui/icon";
+import Card from "./ui/card";
 
 export default function Features() {
+  const { t } = useTranslation();
+
   return (
-    <section id="features" className="flex flex-col gap-10 items-center px-10">
-      <div className="w-full lg:max-w-1/2 flex flex-col text-center gap-6">
-        <h1 className="text-(--primary) font-bold">
-          Tout ce dont vous avez{" "}
-          <span className="text-(--secondary)">besoin</span>
-        </h1>
-        <p className="text-(--primary)">
-          Une suite complète d'outils pour transformer la gestion de vos
-          plannings et libérer du temps pour ce qui compte vraiment : le soin.
-        </p>
+    <section
+      id="features"
+      className="flex flex-col justify-center items-center gap-10 px-10 lg:px-20"
+    >
+      <div className="w-full lg:w-1/2 flex flex-col items-center text-center gap-6">
+        <Badge variant="secondary" label={t("features.badge")} />
+
+        <Title
+          variant="primary"
+          start={t("features.title.start")}
+          param={t("features.title.param")}
+          end={t("features.title.end")}
+        />
+
+        <Description content={t("features.description")} />
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:px-10">
-        {features.map((feature, index) => (
-          <div
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {Array.from(t("features.cards")).map((feature: any, index: number) => (
+          <Card
             key={index}
-            className="flex flex-col bg-white rounded-xl border border-black/20 gap-4 p-8"
-          >
-            <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-(--tertiary)/20 text-(--secondary)">
-              <feature.icon size={25} />
-            </div>
-
-            <h3 className="font-bold text-(--primary)">{feature.title}</h3>
-            <p className="text-(--primary)">{feature.description}</p>
-          </div>
+            icon={<Icon icon={feature.icon} />}
+            title={feature.title}
+            description={feature.description}
+          />
         ))}
       </div>
     </section>
