@@ -1,0 +1,226 @@
+{
+  "application": {
+    "label": "Accéder à l'application",
+    "link": "https://medisync-scheduler-pro.vercel.app/"
+  },
+
+  "form": {
+    "label": "Donner son avis",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSeuTzbgUBJB8y8WhDP9kMNFpFsUhymFF-29K6CM2T1LG-L8Sg/viewform"
+  },
+
+  "nav": [
+    {
+      "label": "Nos Valeurs",
+      "link": "#values"
+    },
+    {
+      "label": "Qui sommes-nous ?",
+      "link": "#about"
+    },
+    {
+      "label": "Fonctionnalités",
+      "link": "#features"
+    },
+    {
+      "label": "Tarifs",
+      "link": "#prices"
+    }
+  ],
+
+  "hero": {
+    "badge": "Solution de planification intelligente",
+    "title": {
+      "start": "Vos plannings, ",
+      "param": "simplifiés",
+      "end": " en un clic"
+    },
+    "description": "Medisync transforme la complexité de la planification des équipes de santé en une tâche simple et automatisée. Respectez les contraintes, gagnez du temps et apaisez vos équipes.",
+    "stats": [
+      {
+        "value": "100%",
+        "label": "Conformité"
+      },
+      {
+        "value": "1 clic",
+        "label": "Génération"
+      },
+      {
+        "value": "24/7",
+        "label": "Disponible"
+      }
+    ],
+    "calendar": {
+      "title": "Planning Équipe Soins",
+      "days": ["L", "M", "M", "J", "V", "S", "D"],
+      "users": [
+        {
+          "name": "Dr. Martin",
+          "schedule": "08:00 - 16:00"
+        },
+        {
+          "name": "Inf. Dubois",
+          "schedule": "14:00 - 22:00"
+        }
+      ]
+    },
+    "alerts": [
+      {
+        "value": "4h / semaine",
+        "label": "Temps économisé"
+      },
+      {
+        "value": "0 détecté",
+        "label": "Conflits"
+      }
+    ]
+  },
+
+  "values": {
+    "badge": "Nos Valeurs",
+    "title": {
+      "start": "Les piliers de notre ",
+      "param": "engagement",
+      "end": ""
+    },
+    "description": "Trois valeurs fondamentales guident notre mission : offrir une solution de planification qui allie précision technique et humanité.",
+    "cards": [
+      {
+        "icon": "shield",
+        "title": "Fiabilité et Précision",
+        "description": "Des plannings rigoureux et sans conflit, où chaque contrainte est respectée.",
+        "features": [
+          "Conformité aux réglementations de travail",
+          "Réduction du risque d'erreurs humaines",
+          "Plannings sans conflits garantis"
+        ]
+      },
+      {
+        "icon": "zap",
+        "title": "Efficacité et Innovation",
+        "description": "Transformez des heures de travail manuel en un clic.",
+        "features": [
+          "Automatisation intelligente",
+          "Interface intuitive et puissante",
+          "Gain de temps considérable"
+        ]
+      },
+      {
+        "icon": "heart",
+        "title": "Équilibre et Sérénité",
+        "description": "L'humain au cœur du planning, avec respect des rythmes de chacun.",
+        "features": [
+          "Respect des contraintes de vie",
+          "Transparence totale sur les affectations",
+          "Réduction du stress des équipes"
+        ]
+      }
+    ]
+  },
+
+  "about": {
+    "badge": "Qui sommes-nous ?",
+    "title": {
+      "start": "",
+      "param": "Medisync",
+      "end": " : La planification intelligente pour la santé"
+    },
+    "description": "Chez Medisync, notre mission est de rétablir l'équilibre au cœur de votre organisation. Nous avons conçu une solution de planification intelligente, automatique et hautement paramétrable pour démanteler la complexité du scheduling.",
+    "benefits": [
+      "Modéliser les profils des salariés et exigences des services",
+      "Générer un planning cohérent et conforme en un seul clic",
+      "Respecter les contraintes horaires, temps partiels et autres",
+      "Garantir la conformité aux réglementations de travail"
+    ],
+    "quote": "Libérer les Ressources Humaines du fardeau logistique. Un planning bien fait est le premier pas vers des soins bien donnés.",
+    "stats": [
+      { "value": "CHU", "label": "Hôpitaux" },
+      { "value": "Cliniques", "label": "Humaines & Vétérinaires" },
+      { "value": "100%", "label": "Automatisé" },
+      { "value": "0", "label": "Conflits" }
+    ],
+    "alert": {
+      "value": "Sérénité des équipes",
+      "label": "Résultat"
+    }
+  },
+
+  "features": {
+    "badge": "Fonctionnalités",
+    "title": {
+      "start": "Tout ce dont vous avez ",
+      "param": "besoin",
+      "end": ""
+    },
+    "description": "Une suite complète d'outils pour transformer la gestion de vos plannings et libérer du temps pour ce qui compte vraiment : le soin.",
+    "cards": [
+      {
+        "icon": "users",
+        "title": "Gestion des Personas",
+        "description": "Créez et gérez les profils de chaque salarié avec leurs contraintes horaires, temps partiels et forfaits spécifiques."
+      },
+      {
+        "icon": "settings",
+        "title": "Paramétrage Service",
+        "description": "Configurez les règles de votre service : horaires, nombre de personnes, règles internes et contraintes légales."
+      },
+      {
+        "icon": "calendar",
+        "title": "Génération Automatique",
+        "description": "Générez des plannings cohérents et conformes en un seul clic, respectant toutes les contraintes définies."
+      },
+      {
+        "icon": "bar-chart-3",
+        "title": "Tableaux de Bord",
+        "description": "Visualisez en temps réel l'état de vos plannings, les heures travaillées et les indicateurs clés."
+      },
+      {
+        "icon": "bell",
+        "title": "Alertes Intelligentes",
+        "description": "Recevez des notifications en cas de conflit potentiel ou de non-conformité détectée."
+      },
+      {
+        "icon": "shield",
+        "title": "Conformité Garantie",
+        "description": "Assurez le respect des réglementations de travail et des accords collectifs automatiquement."
+      }
+    ]
+  },
+
+  "prices": {
+    "badge": "Commencez dès aujourd'hui",
+    "title": {
+      "start": "Prêt à transformer vos ",
+      "param": "plannings",
+      "end": " ?"
+    },
+    "description": "Découvrez comment Medisync peut simplifier la gestion de vos équipes et apporter sérénité à votre établissement de santé.",
+    "cards": [
+      {
+        "name": "Starter",
+        "price": "45€/mois",
+        "features": ["Jusqu'à 15 salariés"]
+      },
+      {
+        "name": "Pro",
+        "price": "120€/mois",
+        "features": ["Jusqu'à 30 salariés", "+ 5€/mois/salarié"]
+      },
+      {
+        "name": "Premium",
+        "price": "350€/mois",
+        "features": ["Personnalisable"]
+      }
+    ]
+  },
+
+  "footer": {
+    "title": {
+      "start": "Medi",
+      "param": "Sync",
+      "end": ""
+    },
+    "description": "La simplicité au service de la vie",
+    "copyright": "Medisync. Tous droits réservés."
+  }
+}
