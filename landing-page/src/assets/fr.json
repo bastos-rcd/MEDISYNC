@@ -185,5 +185,32 @@
         "description": "Assurez le respect des réglementations de travail et des accords collectifs automatiquement."
       }
     ]
+  },
+
+  "prices": {
+    "badge": "Commencez dès aujourd'hui",
+    "title": {
+      "start": "Prêt à transformer vos ",
+      "param": "plannings",
+      "end": " ?"
+    },
+    "description": "Découvrez comment Medisync peut simplifier la gestion de vos équipes et apporter sérénité à votre établissement de santé.",
+    "cards": [
+      {
+        "name": "Starter",
+        "price": "45€/mois",
+        "features": ["Jusqu'à 15 salariés"]
+      },
+      {
+        "name": "Pro",
+        "price": "120€/mois",
+        "features": ["Jusqu'à 30 salariés", "+ 5€/mois/salarié"]
+      },
+      {
+        "name": "Premium",
+        "price": "350€/mois",
+        "features": ["Personnalisable"]
+      }
+    ]
   }
 }

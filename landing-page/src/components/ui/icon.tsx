@@ -10,6 +10,7 @@ import {
   Calendar,
   BarChart3,
   Bell,
+  MessageSquare,
 } from "lucide-react";
 
 interface Props {
@@ -26,7 +27,8 @@ interface Props {
     | "settings"
     | "calendar"
     | "bar-chart-3"
-    | "bell";
+    | "bell"
+    | "message-square";
 }
 
 export default function Icon({ icon, size, color }: Props) {
@@ -101,6 +103,13 @@ export default function Icon({ icon, size, color }: Props) {
     case "bell":
       return (
         <Bell
+          size={size || 25}
+          className={`text-${color || "(--secondary)"}`}
+        />
+      );
+    case "message-square":
+      return (
+        <MessageSquare
           size={size || 25}
           className={`text-${color || "(--secondary)"}`}
         />
