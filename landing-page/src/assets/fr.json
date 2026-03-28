@@ -1,5 +1,15 @@
 {
-  "navigation": [
+  "application": {
+    "label": "Accéder à l'application",
+    "link": "https://medisync-scheduler-pro.vercel.app/"
+  },
+
+  "form": {
+    "label": "Donner son avis",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSeuTzbgUBJB8y8WhDP9kMNFpFsUhymFF-29K6CM2T1LG-L8Sg/viewform"
+  },
+
+  "nav": [
     {
       "label": "Nos Valeurs",
       "link": "#values"
@@ -17,12 +27,52 @@
       "link": "#prices"
     }
   ],
-  "application": {
-    "label": "Accéder à l'application",
-    "link": "https://medisync-scheduler-pro.vercel.app/"
-  },
-  "form": {
-    "label": "Donner son avis",
-    "link": "https://docs.google.com/forms/d/e/1FAIpQLSeuTzbgUBJB8y8WhDP9kMNFpFsUhymFF-29K6CM2T1LG-L8Sg/viewform"
+
+  "hero": {
+    "badge": "Solution de planification intelligente",
+    "title": {
+      "start": "Vos plannings, ",
+      "param": "simplifiés",
+      "end": " en un clic"
+    },
+    "description": "Medisync transforme la complexité de la planification des équipes de santé en une tâche simple et automatisée. Respectez les contraintes, gagnez du temps et apaisez vos équipes.",
+    "stats": [
+      {
+        "value": "100%",
+        "label": "Conformité"
+      },
+      {
+        "value": "1 clic",
+        "label": "Génération"
+      },
+      {
+        "value": "24/7",
+        "label": "Disponible"
+      }
+    ],
+    "calendar": {
+      "title": "Planning Équipe Soins",
+      "days": ["L", "M", "M", "J", "V", "S", "D"],
+      "users": [
+        {
+          "name": "Dr. Martin",
+          "schedule": "08:00 - 16:00"
+        },
+        {
+          "name": "Inf. Dubois",
+          "schedule": "14:00 - 22:00"
+        }
+      ]
+    },
+    "alerts": [
+      {
+        "value": "4h / semaine",
+        "label": "Temps économisé"
+      },
+      {
+        "value": "0 détecté",
+        "label": "Conflits"
+      }
+    ]
   }
 }

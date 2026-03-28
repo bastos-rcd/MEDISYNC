@@ -18,7 +18,7 @@ export default function Header() {
         </Link>
 
         <div className="hidden lg:flex flex-row gap-4">
-          {Array.from(t("navigation")).map((item: any, index: number) => (
+          {Array.from(t("nav")).map((item: any, index: number) => (
             <Link key={index} href={item.link}>
               {item.label}
             </Link>
@@ -46,7 +46,7 @@ export default function Header() {
       {isOpen && (
         <div className="lg:hidden animate-fade-in">
           <nav className="flex flex-col gap-6 p-4">
-            {Array.from(t("navigation")).map((item: any, index: number) => (
+            {Array.from(t("nav")).map((item: any, index: number) => (
               <Link
                 key={index}
                 href={item.link}

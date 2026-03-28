@@ -1,5 +1,5 @@
 interface Props {
-  variant?: "default" | "outline";
+  variant?: "default" | "outline" | "white";
   size?: "normal" | "large";
   children: React.ReactNode;
   onClick?: () => void;
@@ -18,7 +18,9 @@ export default function Button({
         ${
           variant === "outline"
             ? "text-(--primary) hover:text-white border-(--primary) hover:bg-(--primary)"
-            : "text-white border-(--secondary) bg-(--secondary) hover:bg-(--secondary)/80 hover:border-(--secondary)/80"
+            : variant === "white"
+              ? "text-white border-white/60 hover:bg-white/15"
+              : "text-white border-(--secondary) bg-(--secondary) hover:bg-(--secondary)/80 hover:border-(--secondary)/80"
         }
         hover:cursor-pointer transition-colors`}
       onClick={onClick}
