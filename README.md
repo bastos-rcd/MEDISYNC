@@ -11,14 +11,28 @@ cd MEDISYNC
 
 ## Landing Page
 
-> **React** : [medisync-landing.vercel.app](https://medisync-landing.vercel.app/)
+> [medisync-landing.vercel.app](https://medisync-landing.vercel.app/)
 
 ```bash
 cd landing-page
-# Install dependencies
 npm install
-# Run the application
 npm run dev
-# Build the application
-npm run build
+```
+
+## Development
+
+### API
+
+```bash
+cd api
+npm install
+npm run dev
+```
+
+## Production
+
+> [medisync-landing.vercel.app](https://medisync-landing.vercel.app/)
+
+```bash
+docker compose up -d
 ```
