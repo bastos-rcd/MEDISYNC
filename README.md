@@ -21,6 +21,12 @@ npm run dev
 
 ## Development
 
+### DB
+
+```bash
+docker compose up -d medisync-db
+```
+
 ### API
 
 ```bash

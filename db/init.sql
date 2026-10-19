@@ -1,0 +1,51 @@
+CREATE TABLE "teams" (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    max_time NUMERIC(5,2) NOT NULL,
+    min_rest NUMERIC(5,2) NOT NULL,
+    cover JSONB NOT NULL DEFAULT '{}'
+);
+
+CREATE TABLE "jobs" (
+    id SERIAL PRIMARY KEY,
+    team_id INTEGER REFERENCES "teams"(id) ON DELETE CASCADE,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE "users" (
+    id SERIAL PRIMARY KEY,
+    team_id INTEGER REFERENCES "teams"(id) ON DELETE CASCADE,
+    job_id INTEGER REFERENCES "jobs"(id) ON DELETE CASCADE,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255),
+    role VARCHAR(10) DEFAULT 'WORKER' CHECK (role IN ('MANAGER', 'WORKER')),
+    leave_balance NUMERIC(5,2) NOT NULL,
+    working_time DECIMAL(5,2) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE "shifts" (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES "users"(id) ON DELETE CASCADE,
+    start_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    end_date TIMESTAMP WITH TIME ZONE NOT NULL
+);
+
+CREATE TABLE "leaves" (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES "users"(id) ON DELETE CASCADE,
+    start_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    end_date TIMESTAMP WITH TIME ZONE NOT NULL,
+    status VARCHAR(10) DEFAULT 'PENDING' CHECK (status IN ('PENDING', 'ACCEPTED', 'CANCELLED', 'DENIED')),
+    type VARCHAR(10) NOT NULL CHECK (type IN ('HOLIDAYS', 'SICKNESS', 'OTHER')),
+    reason VARCHAR(255)
+);
+
+CREATE TABLE "sessions" (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES "users"(id) ON DELETE CASCADE,
+    token VARCHAR(255) NOT NULL,
+    last_connection TIMESTAMP WITH TIME ZONE NOT NULL
+);
