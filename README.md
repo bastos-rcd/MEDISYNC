@@ -35,6 +35,14 @@ npm install
 npm run dev
 ```
 
+### APP
+
+```bash
+cd app
+npm install
+npm run dev
+```
+
 ## Production
 
 > [medisync-landing.vercel.app](https://medisync-landing.vercel.app/)

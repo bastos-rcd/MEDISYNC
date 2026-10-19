@@ -13,22 +13,5 @@ services:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: unless-stopped
 
-  medisync-api:
-    build:
-      context: ./api
-    expose:
-      - "3000"
-    environment:
-      PORT: 3000
-      DB_HOST: medisync-db
-      DB_PORT: 5432
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: medisyncdb
-      JWT_SECRET: defegrnfdeadeozof
-    depends_on:
-      - medisync-db
-    restart: unless-stopped
-
 volumes:
   medisync_data:
