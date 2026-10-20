@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
+import { User } from '@/users/user.entity.js'
+
 @Module({
 	imports: [
 		ConfigModule.forRoot({
@@ -10,11 +12,11 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 		TypeOrmModule.forRoot({
 			type: 'postgres',
 			host: process.env.DB_HOST ?? 'localhost',
-			port: +(process.env.DB_PORT ?? 5432),
+			port: Number(process.env.DB_PORT ?? 5432),
 			username: process.env.DB_USER ?? 'user',
-			password: process.env.DB_PASSWORD ?? 'pass',
+			password: process.env.DB_PASSWORD ?? 'password',
 			database: process.env.DB_NAME ?? 'medisyncdb',
-			entities: [],
+			entities: [User],
 			synchronize: false,
 		}),
 	],
