@@ -1,8 +1,13 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
+import { APP_GUARD } from '@nestjs/core'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
+import { JwtGuard } from '@/auth/guards/jwt.guard.js'
+import { RolesGuard } from '@/auth/guards/roles.guard.js'
+
 import { User } from '@/users/user.entity.js'
+import { UserModule } from '@/users/user.module.js'
 
 @Module({
 	imports: [
@@ -19,7 +24,17 @@ import { User } from '@/users/user.entity.js'
 			entities: [User],
 			synchronize: false,
 		}),
+		UserModule,
 	],
-	providers: [],
+	providers: [
+		{
+			provide: APP_GUARD,
+			useClass: JwtGuard,
+		},
+		{
+			provide: APP_GUARD,
+			useClass: RolesGuard,
+		},
+	],
 })
 export class AppModule {}

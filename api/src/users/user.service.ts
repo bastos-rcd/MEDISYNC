@@ -1,5 +1,10 @@
 import { Repository } from 'typeorm'
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+	BadRequestException,
+	ConflictException,
+	Injectable,
+	NotFoundException,
+} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 
 import { User } from '@/users/user.entity.js'
@@ -17,5 +22,26 @@ export class UserService {
 		if (!user) throw new NotFoundException('Utilisateur introuvable !')
 
 		return user
+	}
+
+	async create(dto: Partial<User>): Promise<User> {
+		if (
+			!dto.firstName ||
+			!dto.lastName ||
+			!dto.email ||
+			dto.leaveBalance === undefined ||
+			dto.leaveBalance === null ||
+			dto.workingTime === undefined ||
+			dto.workingTime === null
+		)
+			throw new BadRequestException('Données requises manquantes !')
+
+		const user = await this.repo.findOne({ where: { email: dto.email } })
+
+		if (user) throw new ConflictException('Email déjà existant !')
+
+		const create = this.repo.create({ ...dto })
+
+		return await this.repo.save(create)
 	}
 }
