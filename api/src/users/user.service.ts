@@ -58,6 +58,18 @@ export class UserService {
 		return await this.repo.save(create)
 	}
 
+	async update(id: number, dto: Partial<User>): Promise<User> {
+		const user = await this.repo.findOne({ where: { id } })
+
+		if (!user) throw new NotFoundException('Utilisateur introuvable !')
+
+		if (dto.password) {
+			dto.password = await bcrypt.hash(dto.password, 10)
+		}
+
+		return await this.repo.save({ ...user, ...dto })
+	}
+
 	async password(email: string, password: string): Promise<void> {
 		if (!email || !password)
 			throw new BadRequestException('Données requises manquantes !')
@@ -75,5 +87,15 @@ export class UserService {
 		user.password = await bcrypt.hash(password, 10)
 
 		await this.repo.save(user)
+	}
+
+	async delete(id: number): Promise<User> {
+		const user = await this.repo.findOne({
+			where: { id },
+		})
+
+		if (!user) throw new NotFoundException('Utilisateur introuvable !')
+
+		return await this.repo.remove(user)
 	}
 }
