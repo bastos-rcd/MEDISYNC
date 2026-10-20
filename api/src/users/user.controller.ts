@@ -21,6 +21,6 @@ export class UserController {
 	async password(
 		@Body() dto: { email: string; password: string },
 	): Promise<void> {
-		return this.userService.password(dto)
+		return this.userService.password(dto.email, dto.password)
 	}
 }

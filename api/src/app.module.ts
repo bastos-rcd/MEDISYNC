@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { JwtGuard } from '@/auth/guards/jwt.guard.js'
 import { RolesGuard } from '@/auth/guards/roles.guard.js'
 
+import { AuthModule } from '@/auth/auth.module.js'
+
 import { User } from '@/users/user.entity.js'
 import { UserModule } from '@/users/user.module.js'
 
@@ -24,6 +26,7 @@ import { UserModule } from '@/users/user.module.js'
 			entities: [User],
 			synchronize: false,
 		}),
+		AuthModule,
 		UserModule,
 	],
 	providers: [

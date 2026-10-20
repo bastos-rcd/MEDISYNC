@@ -25,6 +25,18 @@ export class UserService {
 		return user
 	}
 
+	async findByEmail(email: string): Promise<User> {
+		const user = await this.repo
+			.createQueryBuilder('user')
+			.addSelect('user.password')
+			.where('user.email = :email', { email })
+			.getOne()
+
+		if (!user) throw new NotFoundException('Utilisateur introuvable !')
+
+		return user
+	}
+
 	async create(dto: Partial<User>): Promise<User> {
 		if (
 			!dto.firstName ||
@@ -46,21 +58,21 @@ export class UserService {
 		return await this.repo.save(create)
 	}
 
-	async password(dto: { email: string; password: string }): Promise<void> {
-		if (!dto.email || !dto.password)
+	async password(email: string, password: string): Promise<void> {
+		if (!email || !password)
 			throw new BadRequestException('Données requises manquantes !')
 
 		const user = await this.repo
 			.createQueryBuilder('user')
 			.addSelect('user.password')
-			.where('user.email = :email', { email: dto.email })
+			.where('user.email = :email', { email })
 			.getOne()
 
 		if (!user) throw new NotFoundException('Utilisateur introuvable !')
 
 		if (user.password) throw new ConflictException('Mot de passe déjà défini !')
 
-		user.password = await bcrypt.hash(dto.password, 10)
+		user.password = await bcrypt.hash(password, 10)
 
 		await this.repo.save(user)
 	}
