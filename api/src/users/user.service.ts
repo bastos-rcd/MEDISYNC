@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt'
 import { Repository } from 'typeorm'
 import {
 	BadRequestException,
@@ -43,5 +44,24 @@ export class UserService {
 		const create = this.repo.create({ ...dto })
 
 		return await this.repo.save(create)
+	}
+
+	async password(dto: { email: string; password: string }): Promise<void> {
+		if (!dto.email || !dto.password)
+			throw new BadRequestException('Données requises manquantes !')
+
+		const user = await this.repo
+			.createQueryBuilder('user')
+			.addSelect('user.password')
+			.where('user.email = :email', { email: dto.email })
+			.getOne()
+
+		if (!user) throw new NotFoundException('Utilisateur introuvable !')
+
+		if (user.password) throw new ConflictException('Mot de passe déjà défini !')
+
+		user.password = await bcrypt.hash(dto.password, 10)
+
+		await this.repo.save(user)
 	}
 }
