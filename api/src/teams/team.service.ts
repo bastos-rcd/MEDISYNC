@@ -16,10 +16,24 @@ export class TeamService {
 	constructor(
 		@InjectRepository(Team)
 		private readonly repo: Repository<Team>,
+		@InjectRepository(User)
+		private readonly userRepo: Repository<User>,
 	) {}
 
 	async find(user: User): Promise<Team> {
 		const team = await this.repo.findOne({ where: { managerId: user.id } })
+
+		if (!team)
+			throw new ConflictException('Aucune équipe trouvée pour ce manager !')
+
+		return team
+	}
+
+	async findWithMembers(user: User): Promise<Team> {
+		const team = await this.repo.findOne({
+			where: { managerId: user.id },
+			relations: { members: true },
+		})
 
 		if (!team)
 			throw new ConflictException('Aucune équipe trouvée pour ce manager !')
@@ -57,11 +71,32 @@ export class TeamService {
 	}
 
 	async delete(user: User): Promise<Team> {
-		const team = await this.repo.findOne({ where: { managerId: user.id } })
+		const team = await this.repo.findOne({
+			where: { managerId: user.id },
+			relations: { members: true },
+		})
 
 		if (!team)
 			throw new NotFoundException('Équipe introuvable pour ce manager !')
 
+		if (team.members.length > 0) {
+			await this.userRepo.remove(team.members)
+		}
+
 		return await this.repo.remove(team)
+	}
+
+	async assign(id: number, user: User): Promise<Team> {
+		const team = await this.repo.findOne({
+			where: { id },
+			relations: { members: true },
+		})
+
+		if (!team) throw new NotFoundException('Équipe introuvable !')
+
+		team.members.push(user)
+		await this.repo.save(team)
+
+		return team
 	}
 }

@@ -5,8 +5,10 @@ import { User } from '@/users/user.entity.js'
 import { UserController } from '@/users/user.controller.js'
 import { UserService } from '@/users/user.service.js'
 
+import { TeamModule } from '@/teams/team.module.js'
+
 @Module({
-	imports: [TypeOrmModule.forFeature([User])],
+	imports: [TypeOrmModule.forFeature([User]), TeamModule],
 	controllers: [UserController],
 	providers: [UserService],
 	exports: [UserService],

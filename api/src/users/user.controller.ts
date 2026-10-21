@@ -37,9 +37,10 @@ export class UserController {
 	@Roles('MANAGER')
 	@Post('worker')
 	async createWorker(
-		@Body() dto: { teamId: number; user: Partial<User> },
+		@CurrentUser() user: User,
+		@Body() dto: Partial<User>,
 	): Promise<User> {
-		return this.userService.createWorker(dto.teamId, dto.user)
+		return this.userService.createWorker(user, dto)
 	}
 
 	@Public()

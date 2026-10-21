@@ -10,11 +10,14 @@ import { InjectRepository } from '@nestjs/typeorm'
 
 import { User } from '@/users/user.entity.js'
 
+import { TeamService } from '@/teams/team.service.js'
+
 @Injectable()
 export class UserService {
 	constructor(
 		@InjectRepository(User)
 		private readonly repo: Repository<User>,
+		private readonly teamService: TeamService,
 	) {}
 
 	async find(id: number): Promise<User> {
@@ -44,8 +47,12 @@ export class UserService {
 	}
 
 	async findAllWorker(user: User): Promise<User[]> {
-		// TODO : find team in user and get all worker in that team
-		return this.repo.find({ where: { role: 'WORKER' } })
+		const team = await this.teamService.findWithMembers(user)
+
+		if (!team)
+			throw new ConflictException('Aucune équipe trouvée pour ce manager !')
+
+		return team.members
 	}
 
 	async createManager(dto: Partial<User>): Promise<User> {
@@ -69,9 +76,8 @@ export class UserService {
 		return await this.repo.save(create)
 	}
 
-	async createWorker(teamId: number, dto: Partial<User>): Promise<User> {
+	async createWorker(user: User, dto: Partial<User>): Promise<User> {
 		if (
-			!teamId ||
 			!dto.firstName ||
 			!dto.lastName ||
 			!dto.email ||
@@ -82,16 +88,18 @@ export class UserService {
 		)
 			throw new BadRequestException('Données requises manquantes !')
 
-		// TODO : find team && throw error
+		const team = await this.teamService.find(user)
 
-		const user = await this.repo.findOne({ where: { email: dto.email } })
+		if (!team) throw new NotFoundException('Équipe introuvable !')
 
-		if (user) throw new ConflictException('Email déjà existant !')
+		const existing = await this.repo.findOne({ where: { email: dto.email } })
+
+		if (existing) throw new ConflictException('Email déjà existant !')
 
 		const create = this.repo.create({ ...dto, role: 'WORKER' })
 		const data = await this.repo.save(create)
 
-		// TODO : assign team
+		await this.teamService.assign(team.id, data)
 
 		return data
 	}
