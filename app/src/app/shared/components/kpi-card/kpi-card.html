@@ -1,0 +1,55 @@
+<div class="flex flex-col bg-white border-secondary border rounded-3xl p-4">
+  <div class="flex flex-row justify-between items-center">
+    <h3>{{ title() }}</h3>
+    <img [src]="icon()" alt="icon" class="w-12 h-12 bg-background rounded-2xl p-2" />
+  </div>
+  <div class="flex flex-row justify-around mt-5">
+    @if (chartType() === 'circle') {
+      <svg class="w-20 h-20" viewBox="0 0 36 36">
+        <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#E5E7EB" stroke-width="4" />
+        <circle
+          cx="18"
+          cy="18"
+          r="15.9155"
+          fill="none"
+          stroke="currentColor"
+          class="text-navbar"
+          stroke-width="4"
+          stroke-dasharray="100, 100"
+          [style.strokeDashoffset]="100 - percent()"
+          stroke-linecap="round"
+        />
+      </svg>
+    } @else {
+      <svg viewBox="0 0 100 60" class="w-24 h-14">
+        <path
+          d="M10 50 A 40 40 0 0 1 90 50"
+          fill="none"
+          stroke="currentColor"
+          class="text-button"
+          stroke-width="16"
+        />
+        <line
+          x1="50"
+          y1="50"
+          x2="50"
+          y2="20"
+          stroke="black"
+          stroke-width="3"
+          [style.transform]="'rotate(' + gaugeAngle() + 'deg)'"
+          style="transform-origin: 50px 50px; transition: transform 0.3s ease"
+        />
+      </svg>
+    }
+    <div class="ml-4">
+      @if (title() === 'Taux de couverture') {
+        <h1 class="text-6xl mb-2">{{ value() + '%' }}</h1>
+      } @else if (title() === 'Heures supplémentaires') {
+        <h1 class="text-6xl mb-2">{{ value() + 'h' }}</h1>
+      } @else {
+        <h1 class="text-6xl mb-2">{{ value() }}</h1>
+      }
+      <p>{{ description() }}</p>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<div class="flex h-screen overflow-hidden">
+  <div class="w-30 shrink-0 relative z-50">
+    <app-navbar #nav class="shadow-2xl" />
+  </div>
+  @if (nav.isOpen()) {
+    <div class="fixed inset-0 bg-black/20 z-40 transition-opacity duration-300 ease-in-out"></div>
+  }
+  <main class="flex-1 overflow-y-auto">
+    <router-outlet></router-outlet>
+  </main>
+</div>
