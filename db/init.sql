@@ -16,7 +16,7 @@ CREATE TABLE "teams" (
     max_time NUMERIC(5,2) NOT NULL,
     min_rest NUMERIC(5,2) NOT NULL,
     cover JSONB NOT NULL DEFAULT '{}',
-    manager_id INTEGER UNIQUE REFERENCES "users"(id) ON DELETE SET NULL,
+    manager_id INTEGER UNIQUE REFERENCES "users"(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 

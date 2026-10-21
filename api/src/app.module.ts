@@ -11,6 +11,9 @@ import { AuthModule } from '@/auth/auth.module.js'
 import { User } from '@/users/user.entity.js'
 import { UserModule } from '@/users/user.module.js'
 
+import { Team } from '@/teams/team.entity.js'
+import { TeamModule } from '@/teams/team.module.js'
+
 @Module({
 	imports: [
 		ConfigModule.forRoot({
@@ -23,11 +26,12 @@ import { UserModule } from '@/users/user.module.js'
 			username: process.env.DB_USER ?? 'user',
 			password: process.env.DB_PASSWORD ?? 'password',
 			database: process.env.DB_NAME ?? 'medisyncdb',
-			entities: [User],
+			entities: [User, Team],
 			synchronize: false,
 		}),
 		AuthModule,
 		UserModule,
+		TeamModule,
 	],
 	providers: [
 		{
