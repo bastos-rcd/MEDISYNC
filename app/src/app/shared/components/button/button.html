@@ -1,0 +1,11 @@
+<button
+  class="border py-4 rounded-2xl w-fit px-20 cursor-pointer"
+  [class]="borderColor()"
+  [class]="colorBg()"
+  [class.border-button]="isSelected() || variant() === 'secondary'"
+  [class.bg-button]="isSelected() || variant() === 'primary'"
+>
+  <div class="flex justify-between items-center gap-2">
+    <p class="font-medium" [class.text-white]="isSelected()">{{ text() }}</p>
+  </div>
+</button>

@@ -1,0 +1,117 @@
+<div class="flex flex-col">
+  <div class="w-full bg-white p-5 mb-5">
+    <h1 class="text-5xl">Absences</h1>
+  </div>
+  <div class="flex flex-row gap-5 bg-white p-3 rounded-2xl ml-3 mr-3">
+    <app-button
+      text="Toutes"
+      borderColor="border-secondary"
+      colorBg="bg-secondary"
+      [isSelected]="currentFilter() == 'Toutes'"
+      (click)="currentFilter.set('Toutes')"
+    />
+    <app-button
+      text="En attente"
+      borderColor="border-secondary"
+      colorBg="bg-secondary"
+      [isSelected]="currentFilter() == 'PENDING'"
+      (click)="currentFilter.set('PENDING')"
+    />
+    <app-button
+      text="Accepté"
+      borderColor="border-secondary"
+      colorBg="bg-secondary"
+      [isSelected]="currentFilter() == 'ACCEPTED'"
+      (click)="currentFilter.set('ACCEPTED')"
+    />
+    <app-button
+      text="Refusé"
+      borderColor="border-secondary"
+      colorBg="bg-secondary"
+      [isSelected]="currentFilter() == 'DENIED'"
+      (click)="currentFilter.set('DENIED')"
+    />
+  </div>
+
+  <div class="grid grid-cols-2 justify-around gap-10 m-10 items-start">
+    <div class="flex flex-col bg-white p-5 rounded-2xl w-full gap-5">
+      <div
+        class="flex flex-col w-full justify-between overflow-y-auto [&::-webkit-scrollbar]:hidden max-h-[70vh]"
+      >
+        @for (leave of filteredLeaves(); track leave.id) {
+          <app-leave-card [leave]="leave" />
+        }
+      </div>
+    </div>
+    <div class="flex flex-col gap-5">
+      <app-kpi-card
+        title="Personnel présent"
+        [value]="8"
+        [description]="'sur 12 employés'"
+        icon="/icons/profile.svg"
+        [max]="12"
+        chartType="circle"
+        class="flex-1 max-w-100"
+      />
+      <div class="flex flex-col bg-white p-5 rounded-2xl w-full">
+        <div class="flex flex-row items-center gap-10 mb-5">
+          <h1>Demande d'absences</h1>
+        </div>
+        <div class="p-5">
+          <div class="flex flex-col w-full">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="flex flex-col w-lg m-5">
+                <label for="startDate">Date de début</label
+                ><input
+                  formControlName="startDate"
+                  type="date"
+                  id="startDate"
+                  min="{{ today | date: 'yyyy-MM-dd' }}"
+                  class="border border-secondary p-2 rounded-lg"
+                />
+              </div>
+              <div class="flex flex-col w-lg m-5">
+                <label for="endDate">Date de fin</label>
+                <input
+                  formControlName="endDate"
+                  type="date"
+                  id="endDate"
+                  class="border border-secondary p-2 rounded-lg"
+                />
+              </div>
+
+              <div class="flex flex-col w-lg m-5">
+                <label for="type">Type</label>
+                <select
+                  formControlName="type"
+                  (change)="leaveType.set(typeSelect.value)"
+                  #typeSelect
+                  id="type"
+                  class="border border-secondary p-2 rounded-lg my-2"
+                >
+                  <option value="HOLIDAYS">Vacances</option>
+                  <option value="SICKNESS">Maladie</option>
+                  <option value="OTHER">Autre</option>
+                </select>
+              </div>
+              @if (leaveType() === 'OTHER') {
+                <div class="flex flex-col m-5">
+                  <label for="reason">Raison</label>
+                  <textarea
+                    formControlName="reason"
+                    type="text"
+                    placeholder="Raison"
+                    class="border border-secondary p-2 rounded-2xl"
+                  ></textarea>
+                </div>
+              }
+              <div class="flex justify-end items-center mt-5">
+                <app-button text="Faire la demande" type="submit" [isSelected]="true" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
