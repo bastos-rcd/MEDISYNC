@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt'
-import { Repository } from 'typeorm'
+import { Not, Repository } from 'typeorm'
 import {
 	BadRequestException,
 	ConflictException,
@@ -37,7 +37,18 @@ export class UserService {
 		return user
 	}
 
-	async create(dto: Partial<User>): Promise<User> {
+	async findAllManager(user: User): Promise<User[]> {
+		return this.repo.find({
+			where: { role: 'MANAGER', id: Not(user.id) },
+		})
+	}
+
+	async findAllWorker(user: User): Promise<User[]> {
+		// TODO : find team in user and get all worker in that team
+		return this.repo.find({ where: { role: 'WORKER' } })
+	}
+
+	async createManager(dto: Partial<User>): Promise<User> {
 		if (
 			!dto.firstName ||
 			!dto.lastName ||
@@ -53,9 +64,36 @@ export class UserService {
 
 		if (user) throw new ConflictException('Email déjà existant !')
 
-		const create = this.repo.create({ ...dto })
+		const create = this.repo.create({ ...dto, role: 'MANAGER' })
 
 		return await this.repo.save(create)
+	}
+
+	async createWorker(teamId: number, dto: Partial<User>): Promise<User> {
+		if (
+			!teamId ||
+			!dto.firstName ||
+			!dto.lastName ||
+			!dto.email ||
+			dto.leaveBalance === undefined ||
+			dto.leaveBalance === null ||
+			dto.workingTime === undefined ||
+			dto.workingTime === null
+		)
+			throw new BadRequestException('Données requises manquantes !')
+
+		// TODO : find team && throw error
+
+		const user = await this.repo.findOne({ where: { email: dto.email } })
+
+		if (user) throw new ConflictException('Email déjà existant !')
+
+		const create = this.repo.create({ ...dto, role: 'WORKER' })
+		const data = await this.repo.save(create)
+
+		// TODO : assign team
+
+		return data
 	}
 
 	async update(id: number, dto: Partial<User>): Promise<User> {

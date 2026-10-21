@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 
+import { CurrentUser } from '@/auth/decorators/current.decorator.js'
 import { Public } from '@/auth/decorators/public.decorator.js'
 import { Roles } from '@/auth/decorators/roles.decorator.js'
 
@@ -11,9 +12,42 @@ export class UserController {
 	constructor(private readonly userService: UserService) {}
 
 	@Roles('MANAGER')
-	@Post()
-	async create(@Body() dto: Partial<User>): Promise<User> {
-		return this.userService.create(dto)
+	@Get('manager')
+	async findAllManager(@CurrentUser() user: User): Promise<User[]> {
+		return this.userService.findAllManager(user)
+	}
+
+	@Roles('MANAGER')
+	@Get('worker')
+	async findAllWorker(@CurrentUser() user: User): Promise<User[]> {
+		return this.userService.findAllWorker(user)
+	}
+
+	@Get(':id')
+	async find(@Param('id') id: number): Promise<User> {
+		return this.userService.find(id)
+	}
+
+	@Roles('MANAGER')
+	@Post('manager')
+	async createManager(@Body() dto: Partial<User>): Promise<User> {
+		return this.userService.createManager(dto)
+	}
+
+	@Roles('MANAGER')
+	@Post('worker')
+	async createWorker(
+		@Body() dto: { teamId: number; user: Partial<User> },
+	): Promise<User> {
+		return this.userService.createWorker(dto.teamId, dto.user)
+	}
+
+	@Public()
+	@Put('password')
+	async password(
+		@Body() dto: { email: string; password: string },
+	): Promise<void> {
+		return this.userService.password(dto.email, dto.password)
 	}
 
 	@Put(':id')
@@ -22,14 +56,6 @@ export class UserController {
 		@Body() dto: Partial<User>,
 	): Promise<User> {
 		return this.userService.update(id, dto)
-	}
-
-	@Public()
-	@Put('/password')
-	async password(
-		@Body() dto: { email: string; password: string },
-	): Promise<void> {
-		return this.userService.password(dto.email, dto.password)
 	}
 
 	@Roles('MANAGER')
