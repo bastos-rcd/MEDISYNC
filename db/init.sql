@@ -4,11 +4,15 @@ CREATE TABLE "users" (
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255),
-    role VARCHAR(10) DEFAULT 'WORKER' CHECK (role IN ('MANAGER', 'WORKER')),
+    role VARCHAR(10) DEFAULT 'WORKER' CHECK (role IN ('ADMIN', 'MANAGER', 'WORKER')),
     leave_balance NUMERIC(5,2) NOT NULL DEFAULT 0,
     working_time NUMERIC(5,2) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+-- password : hashedpwd
+INSERT INTO "users" (first_name, last_name, email, password, role, leave_balance, working_time)
+VALUES ('ADMIN', 'ADMIN', 'admin@medisync.fr', '$2b$10$GwKnopMR9OUARx1AzEhfFuwWw629JxMhpG2nyMUqYIW9zpERHO1Tq', 'ADMIN', 0, 0);
 
 CREATE TABLE "teams" (
     id SERIAL PRIMARY KEY,

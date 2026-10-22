@@ -11,7 +11,7 @@ import { UserService } from '@/users/user.service.js'
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
-	@Roles('MANAGER')
+	@Roles('ADMIN')
 	@Get('manager')
 	async findAllManager(@CurrentUser() user: User): Promise<User[]> {
 		return this.userService.findAllManager(user)
@@ -28,7 +28,7 @@ export class UserController {
 		return this.userService.find(id)
 	}
 
-	@Roles('MANAGER')
+	@Roles('ADMIN')
 	@Post('manager')
 	async createManager(@Body() dto: Partial<User>): Promise<User> {
 		return this.userService.createManager(dto)
@@ -59,7 +59,7 @@ export class UserController {
 		return this.userService.update(id, dto)
 	}
 
-	@Roles('MANAGER')
+	@Roles('ADMIN', 'MANAGER')
 	@Delete(':id')
 	async delete(@Param('id') id: number): Promise<User> {
 		return this.userService.delete(id)
