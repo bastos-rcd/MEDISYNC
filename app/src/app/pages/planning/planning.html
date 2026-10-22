@@ -5,8 +5,72 @@
   <div class="flex flex-row gap-5 items-center justify-between bg-white p-3 rounded-2xl ml-3 mr-3">
     <app-button text="Période" variant="primary" class="text-white" />
     <app-button text="Filtre" variant="secondary" />
-    <app-button text="Ajout du personnel" variant="secondary" />
+    @if (session.isManager()) {
+      <app-button text="Ajout du personnel" variant="secondary" (click)="addUser()" />
+    }
     <app-button text="Exporter" variant="secondary" />
     <app-button text="Générer automatiquement" variant="primary" class="text-white" />
   </div>
+  @if (addUserModal()) {
+    <div class="fixed inset-0 bg-black/50 z-50">
+      <div class="flex justify-center items-center h-full">
+        <div class="bg-white p-5 rounded-2xl w-250">
+          <div class="flex flex-row justify-between items-center pb-5">
+            <h1>Ajouter un employé</h1>
+            <i
+              class="fa-solid fa-xmark cursor-pointer fa-2xl"
+              (click)="addUserModal.set(false)"
+            ></i>
+          </div>
+          <div>
+            <form class="flex flex-col gap-5">
+              <div class="flex flex-row w-full justify-between gap-5">
+                <input
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="text"
+                  placeholder="Prénom"
+                />
+                <input
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="text"
+                  placeholder="Nom"
+                />
+              </div>
+              <input
+                class="w-full border border-button p-2 rounded-2xl"
+                type="email"
+                placeholder="Email"
+              />
+              <div class="flex flex-row w-full justify-between gap-5">
+                <select class="w-full border border-button p-2 rounded-2xl">
+                  <option value="MANAGER">Manager</option>
+                  <option value="WORKER">Employé</option>
+                </select>
+                <select class="w-full border border-button p-2 rounded-2xl">
+                  @for (job of jobs; track $index) {
+                    <option value="{{ job.id }}">{{ job.name }}</option>
+                  }
+                </select>
+              </div>
+
+              <input
+                class="w-full border border-button p-2 rounded-2xl"
+                type="number"
+                placeholder="Temps de travail"
+              />
+            </form>
+          </div>
+          <div class="flex flex-row justify-between items-center pt-5">
+            <app-button
+              text="Annuler"
+              variant="secondary"
+              class="text-black"
+              (click)="addUserModal.set(false)"
+            />
+            <app-button text="Ajouter" variant="primary" class="text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </div>

@@ -2,4 +2,191 @@
   <div class="w-full bg-white p-5 mb-5">
     <h1 class="text-5xl">Équipe</h1>
   </div>
+  <div class="flex flex-row items-center gap-x-16 p-5">
+    <search class="w-100">
+      <form action="/recherche" method="get">
+        <div class="border-2 p-2 rounded-2xl flex flex-row items-center gap-x-2">
+          <input
+            type="search"
+            name="q"
+            placeholder="Rechercher un employé"
+            aria-label="Rechercher un employé"
+            class="w-full"
+          />
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </form>
+    </search>
+
+    @if (session.isManager()) {
+      <div class="flex flex-row gap-5">
+        <app-button text="+ Ajouter" variant="primary" class="text-white" (click)="addUser()" />
+        <app-button text="Paramètres" variant="primary" class="text-white" />
+      </div>
+    }
+  </div>
+  <div class="bg-white p-5 m-5 rounded-2xl">
+    @for (user of users; track $index) {
+      <app-team-card
+        [user]="user"
+        (editUser)="editUser($event)"
+        (deleteUser)="deleteUser($event)"
+      />
+    }
+  </div>
+  @if (addUserModal()) {
+    <div class="fixed inset-0 bg-black/50 z-50">
+      <div class="flex justify-center items-center h-full">
+        <div class="bg-white p-5 rounded-2xl w-250">
+          <div class="flex flex-row justify-between items-center pb-5">
+            <h1>Ajouter un employé</h1>
+            <i
+              class="fa-solid fa-xmark cursor-pointer fa-2xl"
+              (click)="addUserModal.set(false)"
+            ></i>
+          </div>
+          <div>
+            <form class="flex flex-col gap-5">
+              <div class="flex flex-row w-full justify-between gap-5">
+                <input
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="text"
+                  placeholder="Prénom"
+                />
+                <input
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="text"
+                  placeholder="Nom"
+                />
+              </div>
+              <input
+                class="w-full border border-button p-2 rounded-2xl"
+                type="email"
+                placeholder="Email"
+              />
+              <div class="flex flex-row w-full justify-between gap-5">
+                <select class="w-full border border-button p-2 rounded-2xl">
+                  <option value="MANAGER">Manager</option>
+                  <option value="WORKER">Employé</option>
+                </select>
+                <select class="w-full border border-button p-2 rounded-2xl">
+                  @for (job of jobs; track $index) {
+                    <option value="{{ job.id }}">{{ job.name }}</option>
+                  }
+                </select>
+              </div>
+
+              <input
+                class="w-full border border-button p-2 rounded-2xl"
+                type="number"
+                placeholder="Temps de travail"
+              />
+            </form>
+          </div>
+          <div class="flex flex-row justify-between items-center pt-5">
+            <app-button
+              text="Annuler"
+              variant="secondary"
+              class="text-black"
+              (click)="addUserModal.set(false)"
+            />
+            <app-button text="Ajouter" variant="primary" class="text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  @if (editUserModal()) {
+    <div class="fixed inset-0 bg-black/50 z-50">
+      <div class="flex justify-center items-center h-full">
+        <div class="bg-white p-5 rounded-2xl w-250">
+          <div class="flex flex-row justify-between items-center pb-5">
+            <h1>Modifier un employé</h1>
+            <i
+              class="fa-solid fa-xmark cursor-pointer fa-2xl"
+              (click)="editUserModal.set(false)"
+            ></i>
+          </div>
+          <div>
+            <form class="flex flex-col gap-5">
+              <div class="flex flex-row w-full justify-between gap-5">
+                <input
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="text"
+                  placeholder="Prénom"
+                  value="{{ selectedUser()?.firstName }}"
+                />
+                <input
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="text"
+                  placeholder="Nom"
+                  value="{{ selectedUser()?.lastName }}"
+                />
+              </div>
+              <input
+                class="w-full border border-button p-2 rounded-2xl"
+                type="email"
+                placeholder="Email"
+                value="{{ selectedUser()?.email }}"
+              />
+              <div class="flex flex-row w-full justify-between gap-5">
+                <select
+                  class="w-full border border-button p-2 rounded-2xl"
+                  [value]="selectedUser()?.role"
+                >
+                  <option value="MANAGER">Manager</option>
+                  <option value="WORKER">Employé</option>
+                </select>
+                <select class="w-full border border-button p-2 rounded-2xl">
+                  @for (job of jobs; track $index) {
+                    <option [selected]="job.id === selectedUser()?.job?.id" value="{{ job.id }}">
+                      {{ job.name }}
+                    </option>
+                  }
+                </select>
+              </div>
+              <input
+                class="w-full border border-button p-2 rounded-2xl"
+                type="number"
+                placeholder="Temps de travail"
+                value="{{ selectedUser()?.workingTime }}"
+              />
+            </form>
+          </div>
+          <div class="flex flex-row justify-between items-center pt-5">
+            <app-button
+              text="Annuler"
+              variant="secondary"
+              class="text-black"
+              (click)="addUserModal.set(false)"
+            />
+            <app-button text="Ajouter" variant="primary" class="text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  @if (deleteUserModal()) {
+    <div class="fixed inset-0 bg-black/50 z-50">
+      <div class="flex justify-center items-center h-full">
+        <div class="bg-white p-5 rounded-2xl">
+          <div class="flex flex-row justify-between items-center">
+            <h1>Supprimer un employé</h1>
+            <i class="fa-solid fa-xmark cursor-pointer" (click)="deleteUserModal.set(false)"></i>
+          </div>
+          <h2>Êtes-vous sûr de vouloir supprimer cet employé ?</h2>
+          <h3>{{ selectedUser()?.firstName }} {{ selectedUser()?.lastName }}</h3>
+          <div class="flex flex-row gap-5">
+            <app-button text="Supprimer" variant="primary" class="text-white" />
+            <app-button
+              text="Annuler"
+              variant="secondary"
+              class="text-black"
+              (click)="deleteUserModal.set(false)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </div>

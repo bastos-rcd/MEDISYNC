@@ -18,7 +18,7 @@
     <p>{{ leave().reason }}</p>
   }
   <div>
-    @if (leave().user?.role === 'MANAGER') {
+    @if (session.isManager()) {
       @if (leave().status === 'PENDING') {
         <i
           class="fa-solid fa-check text-green text-2xl bg-green-100 my-auto rounded-lg cursor-pointer p-1"

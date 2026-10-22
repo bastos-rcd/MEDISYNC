@@ -8,8 +8,6 @@ import { Component, input } from '@angular/core';
 })
 export class Button {
   text = input<string>();
-  borderColor = input<string>();
-  colorBg = input<string>();
   isSelected = input<boolean>(false);
   variant = input<'primary' | 'secondary'>();
 }

@@ -1,5 +1,6 @@
 import { UserModels } from '@/app/core/models/user.model';
-import { Component, input } from '@angular/core';
+import { SessionService } from '@/app/core/services/session.service';
+import { Component, inject, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-team-card',
@@ -8,5 +9,8 @@ import { Component, input } from '@angular/core';
   styleUrl: './team-card.css',
 })
 export class TeamCard {
+  session = inject(SessionService);
   user = input.required<UserModels>();
+  editUser = output<UserModels>();
+  deleteUser = output<UserModels>();
 }

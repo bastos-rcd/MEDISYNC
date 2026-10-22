@@ -1,10 +1,11 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { LeaveModels } from '@/app/core/models/leave.model';
 import { LeaveCard } from '@/app/shared/components/leave-card/leave-card';
 import { KpiCard } from '@/app/shared/components/kpi-card/kpi-card';
 import { Button } from '@/app/shared/components/button/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { SessionService } from '@/app/core/services/session.service';
 
 @Component({
   selector: 'app-leave',
@@ -13,6 +14,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './leave.css',
 })
 export class Leave {
+  session = inject(SessionService);
   today = new Date();
   currentFilter = signal<'Toutes' | 'PENDING' | 'ACCEPTED' | 'DENIED'>('Toutes');
   leaveType = signal<string>('HOLIDAYS');

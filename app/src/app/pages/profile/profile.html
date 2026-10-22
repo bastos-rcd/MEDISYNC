@@ -1,3 +1,165 @@
-<div class="w-full bg-white p-5 mb-5">
-  <h1 class="text-5xl">Profile</h1>
+<div class="flex flex-col min-h-full">
+  <div class="w-full bg-white p-5 mb-5">
+    <h1 class="text-5xl">Profile</h1>
+  </div>
+  <div class="max-w-6xl mx-auto my-auto w-full">
+    <div class="grid grid-cols-5 gap-10">
+      <div class="col-span-3 bg-white rounded-2xl flex flex-col justify-between p-6">
+        <div>
+          <div class="flex flex-row items-center gap-5 mb-5">
+            <i class="fa-solid fa-circle-info fa-2xl"></i>
+            <h2>Informations personnelles</h2>
+          </div>
+          <div>
+            <div class="flex flex-row items-center gap-5">
+              <div class="bg-navbar p-3 rounded-full">
+                <p class="text-white">
+                  {{ session.currentUser()?.firstName?.[0]
+                  }}{{ session.currentUser()?.lastName?.[0] }}
+                </p>
+              </div>
+              <h3 class="text-2xl">
+                {{ session.currentUser()?.firstName }} {{ session.currentUser()?.lastName }}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <p>Email: {{ session.currentUser()?.email }}</p>
+        <p>Profession: {{ session.currentUser()?.job?.name }}</p>
+        <p>Rôle: {{ session.currentUser()?.role }}</p>
+        <p>Temps de travail: {{ session.currentUser()?.workingTime }} heures</p>
+        <app-button
+          text="Modifier mes informations"
+          variant="primary"
+          (click)="editUser()"
+          class="text-white flex justify-end mt-4"
+        />
+      </div>
+      <div class="col-span-2 bg-white p-6 rounded-2xl flex flex-col justify-between">
+        <h2 class="mb-5">Congés et heures supplémentaires</h2>
+        <div class="flex flex-col items-center justify-center gap-5 p-5">
+          <app-kpi-card
+            title="Congés pris"
+            [value]="8"
+            description="cette année"
+            icon="/icons/calendar.svg"
+            [max]="25"
+            chartType="circle"
+            class="flex-1 w-100"
+          />
+          <app-kpi-card
+            title="Heures supplémentaires"
+            [value]="13"
+            description="cette semaine"
+            icon="/icons/calendar.svg"
+            [max]="20"
+            chartType="gauge"
+            class="flex-1 w-100"
+          />
+        </div>
+        <app-button
+          text="Demande d'absence"
+          variant="primary"
+          class="text-white flex justify-end mt-4"
+        />
+      </div>
+    </div>
+  </div>
+  @if (editUserModal()) {
+    <div class="fixed inset-0 bg-black/50 z-50">
+      <div class="flex justify-center items-center h-full">
+        <div class="bg-white p-5 rounded-2xl w-250">
+          <div class="flex flex-row justify-between items-center pb-5">
+            <h1>Modifier mes informations</h1>
+            <i
+              class="fa-solid fa-xmark cursor-pointer fa-2xl"
+              (click)="editUserModal.set(false)"
+              aria-label="Fermer la fenêtre"
+            ></i>
+          </div>
+          <div>
+            <form class="flex flex-col gap-5">
+              <div class="flex flex-row w-full justify-between gap-5">
+                <div class="flex-1">
+                  <label for="firstName">Prénom</label>
+                  <input
+                    id="firstName"
+                    class="w-full border border-button p-2 rounded-2xl"
+                    type="text"
+                    placeholder="Prénom"
+                    value="{{ session.currentUser()?.firstName }}"
+                  />
+                </div>
+                <div class="flex-1">
+                  <label for="lastName">Nom</label>
+                  <input
+                    id="lastName"
+                    class="w-full border border-button p-2 rounded-2xl"
+                    type="text"
+                    placeholder="Nom"
+                    value="{{ session.currentUser()?.lastName }}"
+                  />
+                </div>
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="email"
+                  placeholder="Email"
+                  value="{{ session.currentUser()?.email }}"
+                />
+              </div>
+              <div class="flex flex-row w-full justify-between gap-5">
+                <div class="flex-1">
+                  <label for="role">Rôle</label>
+                  <select
+                    id="role"
+                    class="w-full border border-button p-2 rounded-2xl"
+                    [value]="session.currentUser()?.role"
+                  >
+                    <option value="MANAGER">Manager</option>
+                    <option value="WORKER">Employé</option>
+                  </select>
+                </div>
+                <div class="flex-1">
+                  <label for="job">Profession</label>
+                  <select id="job" class="w-full border border-button p-2 rounded-2xl">
+                    @for (job of jobs; track $index) {
+                      <option
+                        [selected]="job.id === session.currentUser()?.job?.id"
+                        value="{{ job.id }}"
+                      >
+                        {{ job.name }}
+                      </option>
+                    }
+                  </select>
+                </div>
+              </div>
+              <div class="flex-1">
+                <label for="workingTime">Temps de travail</label>
+                <input
+                  id="workingTime"
+                  class="w-full border border-button p-2 rounded-2xl"
+                  type="number"
+                  placeholder="Temps de travail"
+                  value="{{ session.currentUser()?.workingTime }}"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="flex flex-row justify-between items-center pt-5">
+            <app-button
+              text="Annuler"
+              variant="secondary"
+              class="text-black"
+              (click)="editUserModal.set(false)"
+            />
+            <app-button text="Modifier" variant="primary" class="text-white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </div>

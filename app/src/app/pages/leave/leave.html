@@ -5,29 +5,25 @@
   <div class="flex flex-row gap-5 bg-white p-3 rounded-2xl ml-3 mr-3">
     <app-button
       text="Toutes"
-      borderColor="border-secondary"
-      colorBg="bg-secondary"
+      variant="secondary"
       [isSelected]="currentFilter() == 'Toutes'"
       (click)="currentFilter.set('Toutes')"
     />
     <app-button
       text="En attente"
-      borderColor="border-secondary"
-      colorBg="bg-secondary"
+      variant="secondary"
       [isSelected]="currentFilter() == 'PENDING'"
       (click)="currentFilter.set('PENDING')"
     />
     <app-button
       text="Accepté"
-      borderColor="border-secondary"
-      colorBg="bg-secondary"
+      variant="secondary"
       [isSelected]="currentFilter() == 'ACCEPTED'"
       (click)="currentFilter.set('ACCEPTED')"
     />
     <app-button
       text="Refusé"
-      borderColor="border-secondary"
-      colorBg="bg-secondary"
+      variant="secondary"
       [isSelected]="currentFilter() == 'DENIED'"
       (click)="currentFilter.set('DENIED')"
     />
@@ -44,15 +40,17 @@
       </div>
     </div>
     <div class="flex flex-col gap-5">
-      <app-kpi-card
-        title="Personnel présent"
-        [value]="8"
-        [description]="'sur 12 employés'"
-        icon="/icons/profile.svg"
-        [max]="12"
-        chartType="circle"
-        class="flex-1 max-w-100"
-      />
+      @if (session.isManager()) {
+        <app-kpi-card
+          title="Personnel présent"
+          [value]="8"
+          [description]="'sur 12 employés'"
+          icon="/icons/profile.svg"
+          [max]="12"
+          chartType="circle"
+          class="flex-1 max-w-100"
+        />
+      }
       <div class="flex flex-col bg-white p-5 rounded-2xl w-full">
         <div class="flex flex-row items-center gap-10 mb-5">
           <h1>Demande d'absences</h1>

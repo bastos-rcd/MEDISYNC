@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, input, inject } from '@angular/core';
 import { LeaveModels } from '../../../core/models/leave.model';
+import { SessionService } from '@/app/core/services/session.service';
 
 @Component({
   selector: 'app-leave-card',
@@ -9,6 +10,7 @@ import { LeaveModels } from '../../../core/models/leave.model';
 })
 export class LeaveCard {
   leave = input.required<LeaveModels>();
+  session = inject(SessionService);
 
   onClickAccept = () => {
     this.leave().status = 'ACCEPTED';

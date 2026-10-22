@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { SessionService } from '@/app/core/services/session.service';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,6 +9,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.css',
 })
 export class Navbar {
+  session = inject(SessionService);
   isOpen = signal(false);
   toggleOpen() {
     this.isOpen.update((value) => !value);

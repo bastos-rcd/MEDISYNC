@@ -17,19 +17,21 @@
       />
     }
     <div class="flex flex-col items-center w-full gap-12">
-      <div
-        class="flex flex-row items-center w-full gap-4 cursor-pointer"
-        [class.justify-start]="isOpen()"
-        [class.justify-center]="!isOpen()"
-        [class.gap-4]="isOpen()"
-        [class.px-8]="isOpen()"
-        routerLink="/"
-      >
-        <img class="w-10 shrink-0" src="/icons/dashboard.svg" alt="Dashboard" />
-        @if (isOpen()) {
-          <h3 class="text-background">Dashboard</h3>
-        }
-      </div>
+      @if (session.isManager()) {
+        <div
+          class="flex flex-row items-center w-full gap-4 cursor-pointer"
+          [class.justify-start]="isOpen()"
+          [class.justify-center]="!isOpen()"
+          [class.gap-4]="isOpen()"
+          [class.px-8]="isOpen()"
+          routerLink="/"
+        >
+          <img class="w-10 shrink-0" src="/icons/dashboard.svg" alt="Dashboard" />
+          @if (isOpen()) {
+            <h3 class="text-background">Dashboard</h3>
+          }
+        </div>
+      }
       <div
         class="flex flex-row items-center w-full gap-4 cursor-pointer"
         [class.justify-start]="isOpen()"
