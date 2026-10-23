@@ -55,6 +55,10 @@ export class UserService {
 		return team.members
 	}
 
+	async findAllTeam(user: User): Promise<{ manager: User; members: User[] }> {
+		return await this.teamService.findMyTeam(user)
+	}
+
 	async createManager(dto: Partial<User>): Promise<User> {
 		if (
 			!dto.firstName ||

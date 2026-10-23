@@ -41,6 +41,21 @@ export class TeamService {
 		return team
 	}
 
+	async findMyTeam(user: User): Promise<{ manager: User; members: User[] }> {
+		const team = await this.repo.findOne({
+			where: { members: { id: user.id } },
+			relations: { manager: true, members: true },
+		})
+
+		if (!team)
+			throw new ConflictException('Aucune équipe trouvée pour cet employé !')
+
+		return {
+			manager: team.manager,
+			members: team.members.filter((member) => member.id !== user.id),
+		}
+	}
+
 	async create(user: User, dto: Partial<Team>): Promise<Team> {
 		if (
 			!dto.name ||

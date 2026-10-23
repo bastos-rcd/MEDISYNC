@@ -23,6 +23,15 @@ export class UserController {
 		return this.userService.findAllWorker(user)
 	}
 
+	@Roles('WORKER')
+	@Get('team')
+	async findAllTeam(
+		@CurrentUser() user: User,
+	): Promise<{ manager: User; members: User[] }> {
+		return this.userService.findAllTeam(user)
+	}
+
+	@Roles('ADMIN', 'MANAGER')
 	@Get(':id')
 	async find(@Param('id') id: number): Promise<User> {
 		return this.userService.find(id)
